@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trafikklys</title>
+</head>
+<body onload="lightTimer()">
+    <div id="lights">
+    </div>
+
+<button onclick="lightColor('red')"> Rød </button>
+<button onclick="lightColor('red', 'yellow')"> Rød og gul </button>
+<button onclick="lightColor('gray', 'yellow')"> Gul </button>
+<button onclick="lightColor('gray', 'gray', 'green')"> Grønn </button>
+
+<script>
+
+    function lightColor(colorR, colorY, colorG){
+        document.getElementById('lights').innerHTML = /*html*/`
+        <div class ="colors" style="background-color: ${colorR};"></div>
+        <div class ="colors" style="background-color: ${colorY};"></div>
+        <div class ="colors" style="background-color: ${colorG}"></div>
+        `;
+    }
+    function lightTimer(){
+            setTimeout(activeRed, 2000)
+        }
+        
+    function activeYellow(){
+            lightColor('gray', 'yellow', 'gray'); 
+        } 
+
+        
+
+        function activeGreen(){
+            lightColor('gray', 'gray', 'green');
+            setTimeout(activeYellow, 2000);
+        }
+      
+        function activeRed(){
+            lightColor('red', 'gray', 'gray');
+            setTimeout(activeRedAndYellow, 2000)
+
+        }
+
+        function activeRedAndYellow(){
+            lightColor('red','yellow', 'gray');
+            setTimeout(activeGreen, 2000)
+        }
+
+
+</script>
+
+<style>
+    body {
+        margin-top: 20px;
+        display:grid;
+        justify-content: center;
+    }
+    button {
+        margin-top: 5px;
+        display: flex;
+        justify-content: center;
+    }
+    #lights {
+    background-color: black;
+    width: 100px;
+    height: 200px;
+    display: grid;
+    justify-content: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    }
+
+    div.colors {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-top: 8px;
+    background-color: gray;
+    }
+
+</style>
+</body>
+</html>
